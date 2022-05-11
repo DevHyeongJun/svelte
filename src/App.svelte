@@ -5,7 +5,7 @@
 	import LogicBlockPage from './page/logicblock.svelte';
 
 	const test = 'testDiv';
-	let page = 'lang';
+	let page = 'logic';
 	
 	const buttonHandler = (e) => {
 		const {target} = e;
@@ -25,14 +25,20 @@
 		color : royalblue;
 	}
 
+	#wrap :global(button.active) {
+		color : red;
+	}
+
 </style>
 <h1>{Const.system.name} </h1>
 <div id="wrap">
-	<button data-key="lang" on:click={buttonHandler}>문법</button>
-	<button data-key="props" on:click={buttonHandler}>Props</button>
-	<button data-key="logic" on:click={buttonHandler}>블록 문법</button>
+	
+	<button class:active={page === 'lang'} data-key="lang" on:click={buttonHandler}>문법</button>
+	<button class:active={page === 'props'} data-key="props" on:click={buttonHandler}>Props</button>
+	<button class:active={page === 'logic'} data-key="logic" on:click={buttonHandler}>블록 문법</button>
 
 	{#if page === 'lang'}<LangPage/>{/if}
 	{#if page === 'props'}<PropsPage/>{/if}
 	{#if page === 'logic'}<LogicBlockPage/>{/if}
+
 </div>
