@@ -4,4 +4,4 @@
     export let title = '버튼';
 </script>
 
-<button class={Const.button.className}>{title}</button>
+<button class={Const.button.className} on:click>{title}</button>
