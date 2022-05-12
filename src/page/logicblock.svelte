@@ -8,19 +8,15 @@
 		{ id: '세번쨰', name: '이름3' }
 	];
 
-	let isRun = false;
-	let promise = null;
-	$: if ( isRun ) {
-		promise = () => 
-		
-			new Promise((resolve, reject) => {
-				setTimeout(() => {
-					resolve(`1초가 지나고 동기 처리 <strong>완료 됨</strong>`);
-				}, 10000)
-			});
-		
-	}
-	
+	let testPromise = '';
+	let awaitFunc = () => {
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				resolve(`1초가 지나고 동기 처리 <strong>완료 됨</strong>`);
+			}, 1000);
+		});
+	};
+
 </script>
 
 <h2>블록 문법.! **** </h2>
@@ -50,18 +46,14 @@
 	</li>
 	<li>
 		<h3>await 동기 처리</h3>
+		{#await testPromise}
+				<p>...waiting</p>
+		{:then resultText}
+			<p>{resultText}</p>
+		{:catch error}
+			<p style="color: red">{error.message}</p>
+		{/await}
 
-		{#if isRun }
-			{#await promise}
-					<p>...waiting</p>
-			{:then resultText}
-				<p>{resultText.resolve}</p>
-			{:catch error}
-				<p style="color: red">{error.message}</p>
-			{/await}
-		{/if}
-	
-
-		<button on:click="{() => isRun = !isRun }">시작</button>
+		<button on:click="{() => testPromise = awaitFunc() }">시작</button>
 	</li>
 </ul>
