@@ -4,11 +4,12 @@
 	import PropsPage from './page/props.svelte';
 	import LogicBlockPage from './page/logicblock.svelte';
 	import EventHandlerPage from './page/eventhandler.svelte';
-	import DataBinderPage from './page/databinder.svelte';
+	import LifeCyclePage from './page/lifecycle.svelte';
+	import StorePage from './page/store.svelte';
 
 
 	const test = 'testDiv';
-	let page = 'event';
+	let page = 'store';
 	
 	const buttonHandler = (e) => {
 		const {target} = e;
@@ -41,12 +42,14 @@
 	<button class:active={page === 'props'} data-key="props" on:click={buttonHandler}>Props</button>
 	<button class:active={page === 'logic'} data-key="logic" on:click={buttonHandler}>블록 문법</button>
 	<button class:active={page === 'event'} data-key="event" on:click={buttonHandler}>이벤트 핸들러</button>
-	<button class:active={page === 'bind'} data-key="bind" on:click={buttonHandler}>바인더</button>
+	<button class:active={page === 'life'} data-key="life" on:click={buttonHandler}>라이프사이클</button>
+	<button class:active={page === 'store'} data-key="store" on:click={buttonHandler}>***스토어</button>
 
 	{#if page === 'lang'}<LangPage/>{/if}
 	{#if page === 'props'}<PropsPage/>{/if}
 	{#if page === 'logic'}<LogicBlockPage/>{/if}
 	{#if page === 'event'}<EventHandlerPage/>{/if}
-	{#if page === 'bind'}<DataBinderPage/>{/if}
+	{#if page === 'life'}<LifeCyclePage/>{/if}
+	{#if page === 'store'}<StorePage/>{/if}
 
 </div>
