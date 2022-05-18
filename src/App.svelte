@@ -1,4 +1,7 @@
 <script>
+	import { setContext } from 'svelte';
+    import { CONTEXT_DATA } from './context/global.js';
+
 	import Const from './global/const';
 	import LangPage from './page/lang.svelte';
 	import PropsPage from './page/props.svelte';
@@ -6,14 +9,22 @@
 	import EventHandlerPage from './page/eventhandler.svelte';
 	import LifeCyclePage from './page/lifecycle.svelte';
 	import StorePage from './page/store.svelte';
-
-
-	const test = 'testDiv';
-	let page = 'store';
+	import ContextPage from './page/context.svelte';
 	
+
+
+	setContext(CONTEXT_DATA, {
+        currentPage: () => page,
+		pageMoveCnt: () => i
+    });
+
+	let page = 'context';
+	let i = 1;
 	const buttonHandler = (e) => {
 		const {target} = e;
+
 		page = e.target.getAttribute('data-key');
+		if ( page != 'context' ) i++;
 	}
 </script>
 
@@ -44,6 +55,8 @@
 	<button class:active={page === 'event'} data-key="event" on:click={buttonHandler}>이벤트 핸들러</button>
 	<button class:active={page === 'life'} data-key="life" on:click={buttonHandler}>라이프사이클</button>
 	<button class:active={page === 'store'} data-key="store" on:click={buttonHandler}>***스토어</button>
+	<button class:active={page === 'context'} data-key="context" on:click={buttonHandler}>Context API</button>
+
 
 	{#if page === 'lang'}<LangPage/>{/if}
 	{#if page === 'props'}<PropsPage/>{/if}
@@ -51,5 +64,6 @@
 	{#if page === 'event'}<EventHandlerPage/>{/if}
 	{#if page === 'life'}<LifeCyclePage/>{/if}
 	{#if page === 'store'}<StorePage/>{/if}
+	{#if page === 'context'}<ContextPage/>{/if}
 
 </div>

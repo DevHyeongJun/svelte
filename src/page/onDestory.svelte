@@ -2,7 +2,6 @@
 <script>
 	import { onDestroy  } from 'svelte';
 	onDestroy(() => {
-    	alert('3');
   	});
 </script>
 
